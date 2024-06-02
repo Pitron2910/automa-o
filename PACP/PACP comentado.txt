@@ -1,0 +1,60 @@
+
+
+Projeto comentado de automaçao de cadastro de produtos:
+
+
+
+# Utilizei pyautogui como pg
+# Utilizei pandas como pd
+# Utilizei time
+
+# Abrir a barra de pesquisa apertando a tecla ("win")
+# Escrever ("chrome") e apertar ("enter")
+# Após abrir o Chrome, coloquei o link do servidor de cadastro 
+# "https://dlp.hashtagtreinamentos.com/python/intensivao/login" e defini
+# uma variável para esse valor: link_empresa = "https://dlp.hashtagtreinamentos.com/python/intensivao/login".
+
+# Após abrir o servidor de cadastro, utilizei o comando `pg.click(x, y)`
+# para clicar na aba de email do site. 
+# Usei o comando auxiliar `print(pg.position())` para saber a posição exata
+# onde devo clicar na aba do servidor.
+
+# Usei o comando `pg.write("meu email")` para digitar o meu email na aba do servidor.
+# Depois utilizei `pg.press("tab")` para ir para o próximo campo e digitar `pg.write("senha")`.
+# Para finalizar a primeira página do processo, usei `pg.press("enter")`.
+
+# Após a primeira página, meu desafio foi importar o arquivo "produtos.csv" usando pandas como pd.
+# `pd.read_csv("produtos.csv")` define a variável `tabela = pd.read_csv("produtos.csv")`.
+
+# Em seguida, usei `print(tabela)` para imprimir a tabela e poder definir uma referência.
+
+# Agora, meu desafio é importar os dados referentes à variável tabela. Para isso, escrevi o código:
+# Para cada linha no índice da tabela (`index`, que é o correspondente a linhas em termos de programação),
+# defini `for linha in tabela.index:`.
+
+# Escreva o correspondente do índice "codigo" da tabela no campo especificado usando `pg.click(x, y)`
+# e `pg.write(str(tabela.loc[linha, "codigo"]))`, onde `str` é a abreviação de "string" e converte
+# todo valor numérico para texto, evitando erros.
+# `tabela.loc[linha, "codigo"]`: `tabela` é a variável que defini e `loc[]` é usado para acessar
+# informações no arquivo "produtos.csv" com base no índice (linha) e no nome da coluna (campo).
+
+# Após este comando, o valor do índice "codigo" da variável tabela é digitado no primeiro campo,
+# e para passar para o próximo campo foi novamente utilizado `pg.press("tab")`.
+
+# Para o segundo campo denominado "marca", utilizei os mesmos comandos `pg.write(str(tabela.loc[linha, "marca"]))`
+# e posteriormente `pg.press("tab")`.
+
+# Repeti este comando trocando apenas o índice pela informação correspondente na tabela, até chegar ao campo "obs",
+# que faz referência ao estoque, onde "NaN" está presente quando não se tem informação ou não há disponibilidade.
+
+# Para evitar digitar "NaN" repetidamente, defini a seguinte lógica:
+# Para cada valor diferente de "NaN", escreva o que está presente no campo "obs", caso contrário, não digite nada.
+
+# `for not pd.isna(tabela.loc[linha, "obs"]):`
+# `pg.write(tabela.loc[linha, "obs"])`
+
+# Onde `for not pd.isna` significa: "quando pandas.isna não for nulo, escreva (tabela.loc[linha, "obs"])".
+
+# `pg.press("tab")` - Passar para o campo enviar.
+# `pg.press("enter")` - Para cadastrar as informações.
+# `pg.scroll(5000)` - Para voltar ao início da página e repetir o processo até o final.
